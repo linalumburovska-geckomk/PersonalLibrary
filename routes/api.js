@@ -29,9 +29,14 @@ module.exports = function (app) {
     
     .post(function (req, res){
       var title = req.body.title;
+      
+      if(title===undefined){
+        return res.json('title is empty!')
+      }
       var data = new Books({
         "title": title
       })  
+
       data.save(err => {
         if(err){
             return res.send('Error');
